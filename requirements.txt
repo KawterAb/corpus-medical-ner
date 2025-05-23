@@ -1,0 +1,12 @@
+transformers
+datasets
+scikit-learn
+matplotlib
+seaborn
+pandas
+numpy
+spacy
+textaugment
+textblob
+nltk
+
