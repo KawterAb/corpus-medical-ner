@@ -1,0 +1,29 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Environnements virtuels
+venv/
+.env/
+
+# Dossiers de sortie
+outputs/
+
+# Données temporaires
+data/raw/
+*.zip
+*.tar.gz
+
+# Fichiers de modèles
+*.bin
+*.pt
+*.h5
+
+# Checkpoints Jupyter
+.ipynb_checkpoints/
+
+# Fichiers système
+.DS_Store

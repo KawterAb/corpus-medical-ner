@@ -1,34 +1,56 @@
 # NER Médical – FRASIMED + QUAERO
 
-Projet de traitement de corpus pour le module "Outils de traitement de corpus" (M1 TAL).
+Projet réalisé dans le cadre du module "Outils de traitement de corpus" (M1 TAL).
 
 ## Objectif
 
-Constituer un corpus médical annoté pour la reconnaissance d'entités nommées (NER) à partir des corpus FRASIMED et QUAERO.  
-Les entités ciblées sont : MALADIE, SYMPTÔME, TRAITEMENT.
+Constituer un corpus médical annoté en entités nommées (MALADIE, SYMPTÔME, TRAITEMENT) à partir des corpus FRASIMED et QUAERO, et entraîner un modèle de type Transformer (CamemBERT) pour la tâche de reconnaissance d'entités nommées (NER).
 
 ## Structure du projet
 
-- `data/` : 
-  - `raw/` : données brutes
-  - `processed/` : fichiers BIO, augmentés, puis convertis en dataset
-- `scripts/` : tous les scripts de traitement, visualisation, entraînement, évaluation
-- `outputs/` : figures (histogrammes, résultats)
-- `models/` *(optionnel)* : pour sauvegarder un modèle fine-tuné
+- `data/` : données brutes, données au format BIO, données augmentées
+- `scripts/` : scripts de traitement, visualisation, entraînement et évaluation
+- `outputs/` : sorties graphiques, modèles entraînés, logs
+- `requirements.txt` : bibliothèques Python nécessaires
+- `README.md` : description du projet
 
-## Pipeline
+## Pipeline du projet
 
-1. `01_scrape.py` – Nettoyage et conversion en BIO (`data/processed/*.bio`)
-2. `02_visualize.py` – Histogramme de la longueur des phrases
-3. `03_augment.py` – Augmentation par synonymes avec `textaugment`
-4. `04_create_dataset.py` – Conversion en format HuggingFace `datasets.Dataset`
-5. `05_train.py` – Fine-tuning de CamemBERT sur le corpus médical
-6. `06_eval.py` – Évaluation sur le test set
+1. Fusion et annotation des corpus (`01_merge.py`)
+2. Visualisation des données et statistiques textuelles (`02_stats.py`)
+3. Augmentation de données (`03_augment.py`)
+4. Conversion vers le format HuggingFace Dataset (`04_create_dataset.py`)
+5. Entraînement du modèle CamemBERT (`05_finetune.py`)
+6. Évaluation du modèle (`06_evaluate.py`)
+
+## Données et tâche
+
+- **Tâche** : Reconnaissance d'entités nommées (NER)
+- **Données utilisées** : FRASIMED et QUAERO
+- **Format** : BIO (token \t étiquette)
+- **Entités annotées** : MALADIE, SYMPTÔME, TRAITEMENT
+
+## Résultats attendus
+
+- Corpus annoté et augmenté
+- Visualisations statistiques (fréquences, longueurs, etc.)
+- Modèle entraîné (CamemBERT)
+- Évaluation du modèle avec `classification_report` (sklearn)
+- Sauvegarde des sorties dans `outputs/`
 
 ## Installation
 
+Créer un environnement virtuel et installer les dépendances avec :
+
 ```bash
 pip install -r requirements.txt
-python -m nltk.downloader wordnet omw-1.4
-python -m textblob.download_corpora
 
+
+
+Remarques
+
+    Tous les scripts sont fournis et bien structurés.
+
+    Certains modules n’ont pas pu être exécutés jusqu’au bout localement à cause d’un problème d’espace disque, mais le code est complet.
+
+    L’environnement virtuel n’est pas inclus dans le dépôt.
